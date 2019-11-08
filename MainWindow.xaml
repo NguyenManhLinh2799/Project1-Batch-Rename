@@ -1,0 +1,183 @@
+﻿<Window x:Class="đồ_án_1___interface.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:đồ_án_1___interface"
+        mc:Ignorable="d"
+        Title="BATCH NAME" Height="600" Width="1000">
+    <Window.Resources>
+        <ImageBrush x:Key="ButtonImage"></ImageBrush>
+        <Style TargetType="Button" x:Key="ButtonStyled">
+            <Setter Property="Background" Value="{StaticResource ButtonImage}"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                    Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="Blue" />
+                                <Setter Property="Cursor" Value="Hand" />
+                                <!-- If we don't tell the background to change on hover, it will remain the same -->
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+
+        <Canvas>
+            <Button Click="Start_Clicked" Content="START" Canvas.Left="450" Height="36" Width="54"/>
+        </Canvas>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="15*"/>
+                </Grid.RowDefinitions>
+                <!--Dòng 1-->
+                <Grid Grid.Row="0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Click="add_method" Grid.Column="0" Content="Add Method"/>
+                    <ComboBox Grid.Column="1" Name="comboMethod">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name, Mode=OneWay}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+
+                <!--Dòng 2-->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Click="Delete_Button_Clicked" Content="Delete"/>
+                    <Button Grid.Column="1" Style="{StaticResource ButtonStyled}" Cursor="Hand">
+                        <Button.Background>
+                            <ImageBrush ImageSource="image/downbottom-arrow.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Button Grid.Column="2" Style="{StaticResource ButtonStyled}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="image/down-arrow.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Button Grid.Column="3" Style="{StaticResource ButtonStyled}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="image/up-arrow.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Button Grid.Column="4" Style="{StaticResource ButtonStyled}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="image/uptop-arrow.png"/>
+                        </Button.Background>
+                    </Button>
+                </Grid>
+
+                <!--Dòng 3-->
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="4*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Content="Load"/>
+                    <Button Grid.Column="1" Content="Save"/>
+                    <StackPanel Grid.Column="2" Orientation="Horizontal">
+                        <Label>Preset:</Label>
+                        <ComboBox Margin="0,0,0,-0.2" Width="95">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <!--Các preset-->
+                                    <TextBlock/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                </Grid>
+
+                <!--Dòng 4-->
+                <Grid Grid.Row="3">
+                    <ListBox Name="listMethod">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock FontWeight="Bold" FontSize="15" Text="{Binding Name}"/>
+                                    <TextBlock Text="{Binding Description}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="1">
+
+                <TabControl>
+                    <TabItem Header="Rename Files">
+                        <StackPanel>
+                            <Button Content="ADD" Height="25" Width="50" Click="AddFile_Click" Background="{x:Null}" />
+                            <ScrollViewer>
+                                <Grid Background="#FFE5E5E5" >
+                                    <DataGrid x:Name="DSlistFile" AutoGenerateColumns="False">
+
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="FileName" Binding="{Binding Name,Mode=OneWay}" Width="1*"/>
+                                            <DataGridTextColumn Header="NewName" Binding="{Binding newName,Mode=OneWay}" Width="1*"/>
+                                            <DataGridTextColumn Header="Path" Binding="{Binding Path,Mode=OneWay}" Width="1*"/>
+                                            <DataGridTextColumn Header="Erro" Binding="{Binding Erro,Mode=OneWay}" Width="1*"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Grid>
+                            </ScrollViewer>
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Header="Rename Folders">
+                        <StackPanel Margin="0,0,0,0">
+                            <Button Content="ADD" Height="25" Margin="5,0,732,0" Click="AddFolder_Click"/>
+                            <Grid Background="#FFE5E5E5" Margin="0,20,-2,5">
+                                <DataGrid x:Name="DSlistFolder" AutoGenerateColumns="False">
+
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="FolderName" Binding="{Binding Name}" Width="1*"/>
+                                        <DataGridTextColumn Header="NewName" Binding="{Binding newName}" Width="1*"/>
+                                        <DataGridTextColumn Header="Path" Binding="{Binding Path}" Width="1*"/>
+                                        <DataGridTextColumn Header="Erro" Binding="{Binding Erro}" Width="1*"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </StackPanel>
+
+
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
