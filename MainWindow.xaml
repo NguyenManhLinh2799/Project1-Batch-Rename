@@ -37,7 +37,7 @@
         </Grid.RowDefinitions>
 
         <Canvas>
-            <Button Click="Start_Clicked" Content="START" Canvas.Left="450" Height="36" Width="54"/>
+            <Button Click="Start_Clicked" Content="START BATCH" Height="36" Width="100"/>
         </Canvas>
 
         <Grid Grid.Row="1">
@@ -142,16 +142,16 @@
                 <TabControl>
                     <TabItem Header="Rename Files">
                         <StackPanel>
-                            <Button Content="ADD" Height="25" Width="50" Click="AddFile_Click" Background="{x:Null}" />
+                            <Button Content="ADD" Height="25" Width="50" Click="AddFile_Click" Background="{x:Null}" HorizontalAlignment="Left"/>
                             <ScrollViewer>
                                 <Grid Background="#FFE5E5E5" >
                                     <DataGrid x:Name="DSlistFile" AutoGenerateColumns="False">
 
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn Header="FileName" Binding="{Binding Name,Mode=OneWay}" Width="1*"/>
-                                            <DataGridTextColumn Header="NewName" Binding="{Binding newName,Mode=OneWay}" Width="1*"/>
-                                            <DataGridTextColumn Header="Path" Binding="{Binding Path,Mode=OneWay}" Width="1*"/>
-                                            <DataGridTextColumn Header="Erro" Binding="{Binding Erro,Mode=OneWay}" Width="1*"/>
+                                            <DataGridTextColumn Header="FileName" Binding="{Binding Name, Mode=OneWay}" Width="1*"/>
+                                            <DataGridTextColumn Header="NewName" Binding="{Binding newName, Mode=OneWay}" Width="1*"/>
+                                            <DataGridTextColumn Header="Path" Binding="{Binding Path, Mode=OneWay}" Width="1*"/>
+                                            <DataGridTextColumn Header="Erro" Binding="{Binding Erro, Mode=OneWay}" Width="1*"/>
                                         </DataGrid.Columns>
                                     </DataGrid>
                                 </Grid>
@@ -159,9 +159,9 @@
                         </StackPanel>
                     </TabItem>
                     <TabItem Header="Rename Folders">
-                        <StackPanel Margin="0,0,0,0">
-                            <Button Content="ADD" Height="25" Margin="5,0,732,0" Click="AddFolder_Click"/>
-                            <Grid Background="#FFE5E5E5" Margin="0,20,-2,5">
+                        <StackPanel>
+                            <Button Content="ADD" Height="25" Width="50" Click="AddFolder_Click"  Background="{x:Null}" HorizontalAlignment="Left"/>
+                            <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="DSlistFolder" AutoGenerateColumns="False">
 
                                     <DataGrid.Columns>
