@@ -34,11 +34,10 @@ namespace đồ_án_1___interface
             InitializeComponent();
 
             methodList.Add(new ReplaceOperation() { Args = new ReplaceArgs() { From = "...", To = "..." } });
-            methodList.Add(new NewCaseUpperOperation());
-            methodList.Add(new NewCaseLowerOperation());
-            methodList.Add(new NewCaseFirst());
-            methodList.Add(new Normalize());
-            methodList.Add(new MoveToEnd());
+            methodList.Add(new NewCaseOperation() { Args = new NewCaseArgs() { Mode = 0 } });
+            methodList.Add(new NormalizeOperation());
+            methodList.Add(new MoveOperation() { Args = new MoveArgs() { Mode = 0 } });
+            methodList.Add(new UniqueNameOperation());
             comboMethod.SelectedIndex = 0;
             comboMethod.ItemsSource = methodList;
             listMethod.ItemsSource = addedList;

@@ -269,7 +269,7 @@ namespace đồ_án_1___interface
 
         public override StringOperation Clone()
         {
-            return new NormalizeOperation();
+            return new UniqueNameOperation();
         }
 
         public override void Config()
