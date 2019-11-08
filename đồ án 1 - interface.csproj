@@ -63,6 +63,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="file.cs" />
+    <Compile Include="MoveConfigDialog.xaml.cs">
+      <DependentUpon>MoveConfigDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewCaseConfigDialog.xaml.cs">
+      <DependentUpon>NewCaseConfigDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReplaceConfigDialog.xaml.cs">
       <DependentUpon>ReplaceConfigDialog.xaml</DependentUpon>
     </Compile>
@@ -79,6 +85,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MoveConfigDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewCaseConfigDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ReplaceConfigDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
