@@ -194,7 +194,7 @@
                                             <DataGridTextColumn Header="FileName" Binding="{Binding Name, Mode=OneWay}" Width="1*"/>
                                             <DataGridTextColumn Header="NewName" Binding="{Binding newName, Mode=OneWay}" Width="1*"/>
                                             <DataGridTextColumn Header="Path" Binding="{Binding Path, Mode=OneWay}" Width="1*"/>
-                                            <DataGridTextColumn Header="Erro" Binding="{Binding Erro, Mode=OneWay}" Width="1*"/>
+                                            <DataGridTextColumn Header="Error" Binding="{Binding Error, Mode=OneWay}" Width="1*"/>
                                         </DataGrid.Columns>
                                     </DataGrid>
                                 </Grid>
@@ -211,7 +211,7 @@
                                         <DataGridTextColumn Header="FolderName" Binding="{Binding Name}" Width="1*"/>
                                         <DataGridTextColumn Header="NewName" Binding="{Binding newName}" Width="1*"/>
                                         <DataGridTextColumn Header="Path" Binding="{Binding Path}" Width="1*"/>
-                                        <DataGridTextColumn Header="Erro" Binding="{Binding Erro}" Width="1*"/>
+                                        <DataGridTextColumn Header="Error" Binding="{Binding Error}" Width="1*"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
