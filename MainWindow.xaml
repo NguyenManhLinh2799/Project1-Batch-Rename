@@ -38,6 +38,7 @@
 
         <Canvas>
             <Button Click="Start_Clicked" Content="START BATCH" Height="36" Width="100"/>
+            <Button Click="Clear_Clicked" Content="Clear" Height="36" Width="100" Canvas.Left="100"/>
         </Canvas>
 
         <Grid Grid.Row="1">

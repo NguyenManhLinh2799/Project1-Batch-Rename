@@ -29,6 +29,9 @@ namespace đồ_án_1___interface
         BindingList<StringOperation> methodList = new BindingList<StringOperation>();
         BindingList<StringOperation> addedList = new BindingList<StringOperation>();
         BindingList<file>ListFile = new BindingList<file>();
+        BindingList<file> ListFolder = new BindingList<file>();
+        FileInfo[] File=null;
+        DirectoryInfo[] Folder = null;
         public MainWindow()
         {
             InitializeComponent();
@@ -101,6 +104,30 @@ namespace đồ_án_1___interface
         }
 
         private void AddFolder_Click(object sender, RoutedEventArgs e)
+        {
+            var screen = new CommonOpenFileDialog();
+            screen.IsFolderPicker = true;
+
+            if (screen.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+
+                //lấy tên file
+                DirectoryInfo Filename = new DirectoryInfo(screen.FileName.ToString());
+
+                //lấy tất cả thư mục trong filename
+                Folder = Filename.GetDirectories();
+
+                foreach (var files in Folder)
+                {
+                    file a = new file(files.Name, "", screen.FileName.ToString(), "");
+                    //a.newName = files.Name;
+                    ListFolder.Add(a);
+                }
+                DSlistFolder.ItemsSource = ListFolder;
+            }
+        }
+
+        private void Clear_Clicked(object sender, RoutedEventArgs e)
         {
 
         }
