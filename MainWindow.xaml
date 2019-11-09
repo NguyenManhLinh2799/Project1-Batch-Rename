@@ -7,6 +7,31 @@
         mc:Ignorable="d"
         Title="BATCH NAME" Height="600" Width="1000">
     <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button" >
+                        <Border x:Name="border" Background="#eeeeee" BorderThickness="0">
+                            <ContentPresenter x:Name="cp" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="Black"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#E0F2F1"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="Black"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#bdbdbd"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="Black"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#9e9e9e"></Setter>
+                                <Setter TargetName="cp" Property="TextBlock.Foreground" Value="Black"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <ImageBrush x:Key="ButtonImage"></ImageBrush>
         <Style TargetType="Button" x:Key="ButtonStyled">
             <Setter Property="Background" Value="{StaticResource ButtonImage}"></Setter>
@@ -45,15 +70,16 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-
+            
+            <!--ComboBox to add method-->
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="15*"/>
                 </Grid.RowDefinitions>
-                <!--Dòng 1-->
                 <Grid Grid.Row="0" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"/>
@@ -69,7 +95,7 @@
                     </ComboBox>
                 </Grid>
 
-                <!--Dòng 2-->
+                <!--Buttons to delete and move method-->
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="4*"/>
@@ -79,53 +105,64 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Button Click="Delete_Button_Clicked" Content="Delete"/>
-                    <Button Grid.Column="1" Style="{StaticResource ButtonStyled}" Cursor="Hand">
+                    <Button Click="Bottom_Clicked" Grid.Column="1" Style="{StaticResource ButtonStyled}" Cursor="Hand">
                         <Button.Background>
                             <ImageBrush ImageSource="image/downbottom-arrow.png"/>
                         </Button.Background>
                     </Button>
-                    <Button Grid.Column="2" Style="{StaticResource ButtonStyled}">
+                    <Button Click="Down_Clicked" Grid.Column="2" Style="{StaticResource ButtonStyled}">
                         <Button.Background>
                             <ImageBrush ImageSource="image/down-arrow.png"/>
                         </Button.Background>
                     </Button>
-                    <Button Grid.Column="3" Style="{StaticResource ButtonStyled}">
+                    <Button Click="Up_Clicked" Grid.Column="3" Style="{StaticResource ButtonStyled}">
                         <Button.Background>
                             <ImageBrush ImageSource="image/up-arrow.png"/>
                         </Button.Background>
                     </Button>
-                    <Button Grid.Column="4" Style="{StaticResource ButtonStyled}">
+                    <Button Click="Top_Clicked" Grid.Column="4" Style="{StaticResource ButtonStyled}">
                         <Button.Background>
                             <ImageBrush ImageSource="image/uptop-arrow.png"/>
                         </Button.Background>
                     </Button>
                 </Grid>
 
-                <!--Dòng 3-->
+                <!--Load Preset-->
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="4*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Content="Load"/>
-                    <Button Grid.Column="1" Content="Save"/>
-                    <StackPanel Grid.Column="2" Orientation="Horizontal">
-                        <Label>Preset:</Label>
-                        <ComboBox Margin="0,0,0,-0.2" Width="95">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <!--Các preset-->
-                                    <TextBlock/>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                    </StackPanel>
+                    <Label Grid.Column="0">Preset:</Label>
+                    <ComboBox Grid.Column="1" Name="PresetCombobox">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding PresetName}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button Click="LoadPreset_Clicked" Grid.Column="2" Content="Load"/>
+                </Grid>
+                
+                <!--Save Preset-->
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" Name="PresetNameTextBox"/>
+                    <Button Click="SavePreset_Clicked" Grid.Column="1" Content="Save"/>
                 </Grid>
 
-                <!--Dòng 4-->
-                <Grid Grid.Row="3">
-                    <ListBox Name="listMethod">
+                <!--ListBox of method-->
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="24*"/>
+                        <ColumnDefinition Width="91*"/>
+                        <ColumnDefinition Width="133*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox Name="listMethod" Grid.ColumnSpan="3" Margin="0,0,0,0.4">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
