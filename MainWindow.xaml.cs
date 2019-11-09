@@ -131,5 +131,13 @@ namespace đồ_án_1___interface
         {
 
         }
+
+        private void ConfigMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var item = listMethod.SelectedItem as
+                StringOperation;
+
+            item.Config();
+        }
     }
 }

@@ -12,8 +12,9 @@ namespace đồ_án_1___interface
     // ===============================================================================
     // Parent classes ================================================================
     // ===============================================================================
-    public class StringArgs
+    public class StringArgs : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 
     public abstract class StringOperation
@@ -35,8 +36,10 @@ namespace đồ_án_1___interface
         public string To { get; set; }
     }
 
-    public class ReplaceOperation : StringOperation
+    public class ReplaceOperation : StringOperation, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public override string Operate(string origin)
         {
             var args = Args as ReplaceArgs;
@@ -63,7 +66,8 @@ namespace đồ_án_1___interface
             var screen = new ReplaceConfigDialog(Args);
             if (screen.ShowDialog() == true)
             {
-
+                PropertyChanged?.Invoke(this,
+                    new PropertyChangedEventArgs("Description"));
             }
         }
 
@@ -89,8 +93,10 @@ namespace đồ_án_1___interface
         public int Mode { get; set; }
     }
 
-    public class NewCaseOperation : StringOperation
+    public class NewCaseOperation : StringOperation, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public override string Operate(string origin)
         {
             var args = Args as NewCaseArgs;
@@ -129,7 +135,8 @@ namespace đồ_án_1___interface
             var screen = new NewCaseConfigDialog(Args);
             if (screen.ShowDialog() == true)
             {
-
+                PropertyChanged?.Invoke(this,
+                    new PropertyChangedEventArgs("Description"));
             }
         }
 
@@ -211,8 +218,10 @@ namespace đồ_án_1___interface
         public int Mode { get; set; }
     }
 
-    public class MoveOperation : StringOperation
+    public class MoveOperation : StringOperation, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public override string Operate(string origin)
         {
             string result = "";
@@ -239,7 +248,8 @@ namespace đồ_án_1___interface
             var screen = new MoveConfigDialog(Args);
             if (screen.ShowDialog() == true)
             {
-
+                PropertyChanged?.Invoke(this,
+                    new PropertyChangedEventArgs("Description"));
             }
         }
 

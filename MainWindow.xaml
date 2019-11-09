@@ -130,6 +130,11 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
+                                    <StackPanel.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Config" Click="ConfigMenuItem_Click"/>
+                                        </ContextMenu>
+                                    </StackPanel.ContextMenu>
                                     <TextBlock FontWeight="Bold" FontSize="15" Text="{Binding Name}"/>
                                     <TextBlock Text="{Binding Description}"/>
                                 </StackPanel>
