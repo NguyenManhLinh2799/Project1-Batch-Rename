@@ -19,9 +19,27 @@ namespace đồ_án_1___interface
     /// </summary>
     public partial class MoveConfigDialog : Window
     {
+        MoveArgs myArgs;
+
         public MoveConfigDialog(StringArgs args)
         {
             InitializeComponent();
+
+            myArgs = args as MoveArgs;
+        }
+
+        private void OkButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (front.IsChecked == true)
+            {
+                myArgs.Mode = 0;
+            }
+            else if (back.IsChecked == true)
+            {
+                myArgs.Mode = 1;
+            }
+            DialogResult = true;
+            Close();
         }
     }
 }

@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:đồ_án_1___interface"
         mc:Ignorable="d"
-        Title="MoveConfigDialog" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MoveConfigDialog" Height="200" Width="250">
+    <Canvas>
+        <StackPanel Canvas.Left="63" Canvas.Top="22">
+            <Label FontWeight="Bold">Select mode</Label>
+            <RadioButton Name="front" IsChecked="True">Move to the front</RadioButton>
+            <RadioButton Name="back">Move to the back</RadioButton>
+        </StackPanel>
+        <Button Name="okButton" Width="80" Height="25" Content="OK" Click="OkButton_Click" Canvas.Left="34" Canvas.Top="103"/>
+        <Button Content="Cancel" Width="80" Height="25" IsCancel="True" Canvas.Left="128" Canvas.Top="103"/>
+    </Canvas>
 </Window>

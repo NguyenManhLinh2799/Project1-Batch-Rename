@@ -19,11 +19,23 @@ namespace đồ_án_1___interface
     /// </summary>
     public partial class ReplaceConfigDialog : Window
     {
+        ReplaceArgs myArgs;
+
         public ReplaceConfigDialog(StringArgs args)
         {
             InitializeComponent();
 
+            myArgs = args as ReplaceArgs;
+            fromTextBox.Text = myArgs.From;
+            toTextBox.Text = myArgs.To;
+        }
 
+        private void OkButton_Click(object sender, RoutedEventArgs e)
+        {
+            myArgs.From = fromTextBox.Text;
+            myArgs.To = toTextBox.Text;
+            DialogResult = true;
+            Close();
         }
     }
 }

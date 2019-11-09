@@ -16,13 +16,16 @@ namespace đồ_án_1___interface
     {
         BindingList<StringOperation> methodList = new BindingList<StringOperation>();
         BindingList<StringOperation> addedList = new BindingList<StringOperation>();
-        BindingList<file>ListFile = new BindingList<file>();
+        BindingList<file> ListFile = new BindingList<file>();
+
+        BindingList<file> ListFolder = new BindingList<file>();
+        FileInfo[] File = null;
+        DirectoryInfo[] Folder = null;
 
         // path to Preset file
         string path = AppDomain.CurrentDomain.BaseDirectory + @"\preset.JSON";
-        PresetList loadFromFile = new PresetList() { List = new List<Preset>()};
+        PresetList loadFromFile = new PresetList() { List = new List<Preset>() };
         BindingList<Preset> Presets = new BindingList<Preset>();
-
         public MainWindow()
         {
             InitializeComponent();
@@ -55,7 +58,26 @@ namespace đồ_án_1___interface
         // open dialog to load folders
         private void AddFolder_Click(object sender, RoutedEventArgs e)
         {
+            var screen = new CommonOpenFileDialog();
+            screen.IsFolderPicker = true;
 
+            if (screen.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+
+                //lấy tên file
+                DirectoryInfo Filename = new DirectoryInfo(screen.FileName.ToString());
+
+                //lấy tất cả thư mục trong filename
+                Folder = Filename.GetDirectories();
+
+                foreach (var files in Folder)
+                {
+                    file a = new file(files.Name, "", screen.FileName.ToString(), "");
+                    //a.newName = files.Name;
+                    ListFolder.Add(a);
+                }
+                DSlistFolder.ItemsSource = ListFolder;
+            }
         }
 
         // open dialog to load files
@@ -81,24 +103,26 @@ namespace đồ_án_1___interface
                     ListFile.Add(a);
                 }
                 DSlistFile.ItemsSource = ListFile;
-
-                //var newname = screen.FileName.ToString() + "\\kha";
-                //FileNames[1].MoveTo(newname);
-
-                //MessageBox.Show(newname);
-                //nếu là file lấy đừng dẫn là tới thư mục gốc của nó là . Directory, đuôi file là .Extention
-                //duyệt từng thư mục
-                //foreach (var name in FileNames)
-                //{
-                //    var newName = name.Root + ;
-
-                //}
             }
         }
 
 
+        private void Clear_Clicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ConfigMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var item = listMethod.SelectedItem as
+                StringOperation;
+
+            item.Config();
+        }
+
         private void LoadPresetFromFile()
         {
+
             using (var read = new StreamReader(path))
             {
                 string json = read.ReadToEnd();
@@ -121,7 +145,7 @@ namespace đồ_án_1___interface
             preset.PresetName = PresetNameTextBox.Text;
             preset.List = new List<JSONOperation>();
 
-            foreach(var method in addedList)
+            foreach (var method in addedList)
             {
                 preset.AddToList(method);
             }
@@ -238,3 +262,5 @@ namespace đồ_án_1___interface
         }
     }
 }
+
+

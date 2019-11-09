@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:đồ_án_1___interface"
         mc:Ignorable="d"
-        Title="ReplaceConfigDialog" Height="450" Width="450">
-    <Grid>
-        
-    </Grid>
+        Title="ReplaceConfigDialog" Height="200" Width="250">
+    <Canvas>
+        <Label Content="From" Canvas.Left="20" Canvas.Top="14"></Label>
+        <TextBox Name="fromTextBox" Width="133" Canvas.Left="62" Canvas.Top="14" Height="25"></TextBox>
+        <Label Content="To" Canvas.Left="20" Canvas.Top="53" RenderTransformOrigin="1.348,0.516"></Label>
+        <TextBox Name="toTextBox" Width="133" Canvas.Left="62" Canvas.Top="54" Height="25"></TextBox>
+        <Button Name="okButton" Width="80" Height="25" Content="OK" Click="OkButton_Click" Canvas.Left="20" Canvas.Top="95"/>
+        <Button Content="Cancel" Width="80" Height="25" IsCancel="True" Canvas.Left="114" Canvas.Top="95"/>
+    </Canvas>
 </Window>

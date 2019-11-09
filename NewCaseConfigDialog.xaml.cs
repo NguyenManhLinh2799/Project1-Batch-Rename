@@ -19,9 +19,31 @@ namespace đồ_án_1___interface
     /// </summary>
     public partial class NewCaseConfigDialog : Window
     {
+        NewCaseArgs myArgs;
+
         public NewCaseConfigDialog(StringArgs args)
         {
             InitializeComponent();
+
+            myArgs = args as NewCaseArgs;
+        }
+
+        private void OkButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (upAll.IsChecked == true)
+            {
+                myArgs.Mode = 0;
+            }
+            else if (lowAll.IsChecked == true)
+            {
+                myArgs.Mode = 1;
+            }
+            else if (upFirst.IsChecked == true)
+            {
+                myArgs.Mode = 2;
+            }
+            DialogResult = true;
+            Close();
         }
     }
 }

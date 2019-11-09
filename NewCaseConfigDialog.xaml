@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:đồ_án_1___interface"
         mc:Ignorable="d"
-        Title="NewCaseConfigDialog" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="NewCaseConfigDialog" Height="200" Width="300">
+    <Canvas>
+        <StackPanel Canvas.Left="45" Canvas.Top="20">
+            <Label FontWeight="Bold">Select mode</Label>
+            <RadioButton Name="upAll" IsChecked="True">Uppercase all</RadioButton>
+            <RadioButton Name="lowAll">Lowercase all</RadioButton>
+            <RadioButton Name="upFirst">Uppercase first letter of each word</RadioButton>
+        </StackPanel>
+        <Button Name="okButton" Width="80" Height="25" Content="OK" Click="OkButton_Click" Canvas.Left="46" Canvas.Top="107"/>
+        <Button Content="Cancel" Width="80" Height="25" IsCancel="True" Canvas.Left="168" Canvas.Top="107"/>
+    </Canvas>
 </Window>
