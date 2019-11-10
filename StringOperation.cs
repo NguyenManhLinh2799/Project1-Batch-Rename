@@ -236,9 +236,20 @@ namespace đồ_án_1___interface
             string fileExtension = name[1];
 
             string result = "";
-            result += fileName.Substring(13);
-            result += " ";
-            result += fileName.Substring(0, 12);
+
+            var args = Args as MoveArgs;
+            if (args.Mode == 0)
+            {
+                result += fileName.Substring(fileName.Length - 13);
+                result += " ";
+                result += fileName.Substring(0, fileName.Length - 13 - 1);
+            }
+            else if (args.Mode == 1)
+            {
+                result += fileName.Substring(14);
+                result += " ";
+                result += fileName.Substring(0, 12);
+            }
 
             result += $".{fileExtension}";
             return result;
