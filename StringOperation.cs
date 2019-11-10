@@ -230,7 +230,6 @@ namespace đồ_án_1___interface
             result += origin.Substring(0, 12);
             return result;
         }
-
         public override StringOperation Clone()
         {
             var oldArgs = Args as MoveArgs;
@@ -264,6 +263,7 @@ namespace đồ_án_1___interface
             }
         }
     }
+
 
     // ===============================================================================
     // Unique Name Method ============================================================

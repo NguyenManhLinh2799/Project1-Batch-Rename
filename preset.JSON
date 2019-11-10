@@ -1,4 +1,34 @@
 {
-	"Count":0,
-	"List": []
+  "Count": 1,
+  "List": [
+    {
+      "PresetName": "My Favourite",
+      "List": [
+        {
+          "OperationName": "Replace",
+          "Args": [
+            ".jpg",
+            ".jpeg"
+          ],
+          "IntArgs": 0
+        },
+        {
+          "OperationName": "Replace",
+          "Args": [
+            "unsplash",
+            "mywebsite"
+          ],
+          "IntArgs": 0
+        },
+        {
+          "OperationName": "Replace",
+          "Args": [
+            "1920x1080",
+            ""
+          ],
+          "IntArgs": 0
+        }
+      ]
+    }
+  ]
 }

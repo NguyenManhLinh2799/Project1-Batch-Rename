@@ -187,9 +187,9 @@
                     <TabItem Header="Rename Files">
                         <StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Button Content="ADD" Height="25" Width="50" Click="AddFile_Click" Margin="0,0,5,0" HorizontalAlignment="Left"/>
-                                <Button Content="Preview" Height="25" Width="50" Click="PreviewFile_Click" Margin="0,0,5,0" HorizontalAlignment="Left"/>
-                                <Button Content="Apply" Height="25" Width="60" Click="ApplyFile_Click" Margin="0,0,5,0" HorizontalAlignment="Left"/>
+                                <Button Content="ADD" Height="25" Width="80" Click="AddFile_Click" Margin="0,0,5,0" HorizontalAlignment="Left"/>
+                                <Button Content="Preview" Height="25" Width="80" Click="PreviewFile_Click" Margin="0,0,5,0" HorizontalAlignment="Left"/>
+                                <Button Content="Apply" Height="25" Width="80" Click="ApplyFile_Click" Margin="0,0,5,0" HorizontalAlignment="Left"/>
                             </StackPanel>
                             <StackPanel>
                                 <ScrollViewer MinHeight="460">
@@ -210,9 +210,9 @@
                     <TabItem Header="Rename Folders">
                         <StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Button Content="ADD" Height="25" Width="50" Click="AddFolder_Click" Margin="0,0,5,0" HorizontalAlignment="Left"/>
-                                <Button Content="Preview" Height="25" Width="50" Click="PreviewFolder_Click" Margin="0,0,5,0" HorizontalAlignment="Left"/>
-                                <Button Content="Apply" Height="25" Width="60" Click="ApplyFolder_Click" Margin="0,0,5,0" HorizontalAlignment="Left"/>
+                                <Button Content="ADD" Height="25" Width="80" Click="AddFolder_Click" Margin="0,0,5,0" HorizontalAlignment="Left"/>
+                                <Button Content="Preview" Height="25" Width="80" Click="PreviewFolder_Click" Margin="0,0,5,0" HorizontalAlignment="Left"/>
+                                <Button Content="Apply" Height="25" Width="80" Click="ApplyFolder_Click" Margin="0,0,5,0" HorizontalAlignment="Left"/>
                             </StackPanel>
                             <ScrollViewer Height="475">
                                 <Grid Background="#FFE5E5E5">
