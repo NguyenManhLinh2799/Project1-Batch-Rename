@@ -99,23 +99,25 @@ namespace đồ_án_1___interface
 
         public override string Operate(string origin)
         {
+            var name = origin.Split('.');
+            string fileName = name[0];
+            string fileExtension = name[1];
             var args = Args as NewCaseArgs;
             if (args.Mode == 0)
             {
-                return origin.ToUpper();
+                fileName = fileName.ToUpper();
             }
             else if (args.Mode == 1)
             {
-                return origin.ToLower();
+                fileName = fileName.ToLower();
             }
             else if (args.Mode == 2)
             {
-                return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(origin.ToLower());
+                fileName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(fileName.ToLower());
             }
-            else
-            {
-                return "";
-            }
+
+            string result = $"{fileName}.{fileExtension}";
+            return result;
         }
 
         public override StringOperation Clone()
@@ -176,20 +178,25 @@ namespace đồ_án_1___interface
     {
         public override string Operate(string origin)
         {
-            origin = origin.Trim();
-            origin = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(origin.ToLower());
+            var name = origin.Split('.');
+            string fileName = name[0];
+            string fileExtension = name[1];
+
+            fileName = fileName.Trim();
+            fileName = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(fileName.ToLower());
 
             string result = "";
 
             // Ignore unnecessary whitespace
-            for (int i = 0; i < origin.Length; i++)
+            for (int i = 0; i < fileName.Length; i++)
             {
-                if (!(origin[i] == ' ' && origin[i+1] == ' '))
+                if (!(fileName[i] == ' ' && fileName[i+1] == ' '))
                 {
-                    result += origin[i];
+                    result += fileName[i];
                 }
             }
 
+            result += $".{fileExtension}";
             return result;
         }
 
@@ -224,10 +231,16 @@ namespace đồ_án_1___interface
 
         public override string Operate(string origin)
         {
+            var name = origin.Split('.');
+            string fileName = name[0];
+            string fileExtension = name[1];
+
             string result = "";
-            result += origin.Substring(13);
+            result += fileName.Substring(13);
             result += " ";
-            result += origin.Substring(0, 12);
+            result += fileName.Substring(0, 12);
+
+            result += $".{fileExtension}";
             return result;
         }
         public override StringOperation Clone()
@@ -274,7 +287,12 @@ namespace đồ_án_1___interface
     {
         public override string Operate(string origin)
         {
-            return Guid.NewGuid().ToString();
+            var name = origin.Split('.');
+            string fileExtension = name[1];
+
+            string result = Guid.NewGuid().ToString();
+            result += $".{fileExtension}";
+            return result;
         }
 
         public override StringOperation Clone()
