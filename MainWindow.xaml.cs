@@ -6,6 +6,7 @@ using app;
 using System.Collections.Generic;
 using System;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace đồ_án_1___interface
 {
@@ -17,10 +18,12 @@ namespace đồ_án_1___interface
         BindingList<StringOperation> methodList = new BindingList<StringOperation>();
         BindingList<StringOperation> addedList = new BindingList<StringOperation>();
         BindingList<file> ListFile = new BindingList<file>();
-
         BindingList<file> ListFolder = new BindingList<file>();
         FileInfo[] File = null;
         DirectoryInfo[] Folder = null;
+
+        //kha 10/11/2019
+        int kt=0;
 
         // path to Preset file
         string path = AppDomain.CurrentDomain.BaseDirectory + @"\preset.JSON";
@@ -95,9 +98,9 @@ namespace đồ_án_1___interface
                 //lấy tất cả thư mục trong filename
 
                 //cần 2 biến toàn cục để lưu file lại
-                var FileNames = Filename.GetFiles();
+                File = Filename.GetFiles();
 
-                foreach (var files in FileNames)
+                foreach (var files in File)
                 {
                     file a = new file(files.Name, "", files.Directory.ToString(), "");
                     ListFile.Add(a);
@@ -109,7 +112,7 @@ namespace đồ_án_1___interface
 
         private void Clear_Clicked(object sender, RoutedEventArgs e)
         {
-
+            addedList.Clear();
         }
 
         private void ConfigMenuItem_Click(object sender, RoutedEventArgs e)
@@ -260,6 +263,71 @@ namespace đồ_án_1___interface
                 addedList.Insert(index + 1, itemToMove);
             }
         }
+
+
+        //<kha mới thêm 10/11/2019>
+        private void PreviewFile_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ApplyFile_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// hàm kiểm tra lỗi đặt tên
+        /// </summary>
+        /// <param name="ListFile"></param>
+        void CheckError(BindingList<file> ListFile)
+        {
+            for (int i = 0; i < ListFile.Count(); i++)
+            {
+                //string dau = "";
+                string temp = ListFile[i].newName;
+                for (int j = 0; j < temp.Length; j++)
+                {
+                    if (temp[j] == '/' || temp[j] == 92 || temp[j] == '>' || temp[j] == '<' || temp[j] == '?' || temp[j] == '*' || temp[j] == '|' || temp[j] == '"')
+                    {
+                        ListFile[i].Error = "error";
+                        kt = 1;
+                        break;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// hàm kiểm tra lỗi trùng tên file và folder
+        /// </summary>
+        /// <param name="ListFile"></param>
+        void CheckLoopName(BindingList<file> ListFile)
+        {
+            for (int i = 0; i < ListFile.Count() - 1; i++)
+            {
+                for (int j = i + 1; j < ListFile.Count(); j++)
+                {
+                    if (ListFile[i].newName == ListFile[j].newName && ListFile[i].Path == ListFile[j].Path)
+                    {
+                        ListFile[i].Error = "error";
+                        ListFile[j].Error = "error";
+                        kt = 2;
+                    }
+                }
+            }
+        }
+
+        private void PreviewFolder_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ApplyFolder_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        //</kha mới thêm 10/11/2019>
     }
 }
 

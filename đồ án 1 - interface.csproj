@@ -144,6 +144,12 @@
     <Resource Include="image\down-arrow.png" />
     <Resource Include="image\uptop-arrow.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\fast-forwa2rd.png" />
+    <Resource Include="image\fast-forwa2rd1.png" />
+    <Resource Include="image\multimedia1.png" />
+    <Resource Include="image\multimedia2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Fody.6.0.0\build\Fody.targets" Condition="Exists('packages\Fody.6.0.0\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

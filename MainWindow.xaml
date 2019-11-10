@@ -108,22 +108,22 @@
                     <Button Click="Delete_Button_Clicked" Content="Delete"/>
                     <Button Click="Bottom_Clicked" Grid.Column="1" Style="{StaticResource ButtonStyled}" Cursor="Hand">
                         <Button.Background>
-                            <ImageBrush ImageSource="image/downbottom-arrow.png"/>
+                            <ImageBrush ImageSource="image/fast-forwa2rd.png"/>
                         </Button.Background>
                     </Button>
                     <Button Click="Down_Clicked" Grid.Column="2" Style="{StaticResource ButtonStyled}">
                         <Button.Background>
-                            <ImageBrush ImageSource="image/down-arrow.png"/>
+                            <ImageBrush ImageSource="image/multimedia1.png"/>
                         </Button.Background>
                     </Button>
                     <Button Click="Up_Clicked" Grid.Column="3" Style="{StaticResource ButtonStyled}">
                         <Button.Background>
-                            <ImageBrush ImageSource="image/up-arrow.png"/>
+                            <ImageBrush ImageSource="image/multimedia2.png"/>
                         </Button.Background>
                     </Button>
                     <Button Click="Top_Clicked" Grid.Column="4" Style="{StaticResource ButtonStyled}">
                         <Button.Background>
-                            <ImageBrush ImageSource="image/uptop-arrow.png"/>
+                            <ImageBrush ImageSource="image/fast-forwa2rd1.png"/>
                         </Button.Background>
                     </Button>
                 </Grid>
@@ -185,16 +185,20 @@
                 <TabControl>
                     <TabItem Header="Rename Files">
                         <StackPanel>
-                            <Button Content="ADD" Height="25" Width="50" Click="AddFile_Click" Background="{x:Null}" HorizontalAlignment="Left"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="ADD" Height="25" Width="50" Click="AddFile_Click" Margin="0,0,5,0" HorizontalAlignment="Left"/>
+                                <Button Content="Review" Height="25" Width="50" Click="PreviewFile_Click" Margin="0,0,5,0" HorizontalAlignment="Left"/>
+                                <Button Content="Apply" Height="25" Width="60" Click="ApplyFile_Click" Margin="0,0,5,0" HorizontalAlignment="Left"/>
+                            </StackPanel>
                             <ScrollViewer>
                                 <Grid Background="#FFE5E5E5" >
                                     <DataGrid x:Name="DSlistFile" AutoGenerateColumns="False">
 
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn Header="FileName" Binding="{Binding Name, Mode=OneWay}" Width="1*"/>
-                                            <DataGridTextColumn Header="NewName" Binding="{Binding newName, Mode=OneWay}" Width="1*"/>
-                                            <DataGridTextColumn Header="Path" Binding="{Binding Path, Mode=OneWay}" Width="1*"/>
-                                            <DataGridTextColumn Header="Error" Binding="{Binding Error, Mode=OneWay}" Width="1*"/>
+                                            <DataGridTextColumn Header="FileName" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="1*"/>
+                                            <DataGridTextColumn Header="NewName" Binding="{Binding newName, UpdateSourceTrigger=PropertyChanged}" Width="1*"/>
+                                            <DataGridTextColumn Header="Path" Binding="{Binding Path, UpdateSourceTrigger=PropertyChanged}" Width="1*"/>
+                                            <DataGridTextColumn Header="Error" Binding="{Binding Error, UpdateSourceTrigger=PropertyChanged}" Width="1*"/>
                                         </DataGrid.Columns>
                                     </DataGrid>
                                 </Grid>
@@ -203,15 +207,19 @@
                     </TabItem>
                     <TabItem Header="Rename Folders">
                         <StackPanel>
-                            <Button Content="ADD" Height="25" Width="50" Click="AddFolder_Click"  Background="{x:Null}" HorizontalAlignment="Left"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="ADD" Height="25" Width="50" Click="AddFolder_Click" Margin="0,0,5,0" HorizontalAlignment="Left"/>
+                                <Button Content="Review" Height="25" Width="50" Click="PreviewFolder_Click" Margin="0,0,5,0" HorizontalAlignment="Left"/>
+                                <Button Content="Apply" Height="25" Width="60" Click="ApplyFolder_Click" Margin="0,0,5,0" HorizontalAlignment="Left"/>
+                            </StackPanel>
                             <Grid Background="#FFE5E5E5">
                                 <DataGrid x:Name="DSlistFolder" AutoGenerateColumns="False">
 
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="FolderName" Binding="{Binding Name}" Width="1*"/>
-                                        <DataGridTextColumn Header="NewName" Binding="{Binding newName}" Width="1*"/>
-                                        <DataGridTextColumn Header="Path" Binding="{Binding Path}" Width="1*"/>
-                                        <DataGridTextColumn Header="Error" Binding="{Binding Error}" Width="1*"/>
+                                        <DataGridTextColumn Header="FolderName" Binding="{Binding Name,UpdateSourceTrigger=PropertyChanged}" Width="1*"/>
+                                        <DataGridTextColumn Header="NewName" Binding="{Binding newName,UpdateSourceTrigger=PropertyChanged}" Width="1*"/>
+                                        <DataGridTextColumn Header="Path" Binding="{Binding Path,UpdateSourceTrigger=PropertyChanged}" Width="1*"/>
+                                        <DataGridTextColumn Header="Error" Binding="{Binding Error,UpdateSourceTrigger=PropertyChanged}" Width="1*"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
