@@ -101,7 +101,8 @@ namespace đồ_án_1___interface
         {
             var name = origin.Split('.');
             string fileName = name[0];
-            string fileExtension = name[1];
+            string fileExtension = name.Length == 2 ? name[1] : "";
+
             var args = Args as NewCaseArgs;
             if (args.Mode == 0)
             {
@@ -116,8 +117,8 @@ namespace đồ_án_1___interface
                 fileName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(fileName.ToLower());
             }
 
-            string result = $"{fileName}.{fileExtension}";
-            return result;
+            fileName += fileExtension != "" ? $".{fileExtension}" : "";
+            return fileName;
         }
 
         public override StringOperation Clone()
@@ -180,7 +181,7 @@ namespace đồ_án_1___interface
         {
             var name = origin.Split('.');
             string fileName = name[0];
-            string fileExtension = name[1];
+            string fileExtension = name.Length == 2 ? name[1] : "";
 
             fileName = fileName.Trim();
             fileName = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(fileName.ToLower());
@@ -196,7 +197,7 @@ namespace đồ_án_1___interface
                 }
             }
 
-            result += $".{fileExtension}";
+            result += fileExtension != "" ? $".{fileExtension}" : "";
             return result;
         }
 
@@ -233,13 +234,15 @@ namespace đồ_án_1___interface
         {
             var name = origin.Split('.');
             string fileName = name[0];
-            string fileExtension = name[1];
+            string fileExtension = name.Length == 2 ? name[1] : "";
 
             string result = "";
 
             var args = Args as MoveArgs;
             if (args.Mode == 0)
             {
+                // Nguyen Manh Linh ABC0123456789
+                // 012345678901234567890123456789
                 result += fileName.Substring(fileName.Length - 13);
                 result += " ";
                 result += fileName.Substring(0, fileName.Length - 13 - 1);
@@ -248,10 +251,10 @@ namespace đồ_án_1___interface
             {
                 result += fileName.Substring(14);
                 result += " ";
-                result += fileName.Substring(0, 12);
+                result += fileName.Substring(0, 13);
             }
 
-            result += $".{fileExtension}";
+            result += fileExtension != "" ? $".{fileExtension}" : "";
             return result;
         }
         public override StringOperation Clone()
@@ -299,10 +302,10 @@ namespace đồ_án_1___interface
         public override string Operate(string origin)
         {
             var name = origin.Split('.');
-            string fileExtension = name[1];
+            string fileExtension = name.Length == 2 ? name[1] : "";
 
             string result = Guid.NewGuid().ToString();
-            result += $".{fileExtension}";
+            result += fileExtension != "" ? $".{fileExtension}" : "";
             return result;
         }
 
