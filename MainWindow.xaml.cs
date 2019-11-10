@@ -21,7 +21,8 @@ namespace đồ_án_1___interface
         BindingList<file> ListFolder = new BindingList<file>();
         FileInfo[] File = null;
         DirectoryInfo[] Folder = null;
-
+        List<string> nameFile=new List<string>();
+        List<string> nameFolder = new List<string>();
         //kha 10/11/2019
         int kt=0;
 
@@ -29,6 +30,7 @@ namespace đồ_án_1___interface
         string path = AppDomain.CurrentDomain.BaseDirectory + @"\preset.JSON";
         PresetList loadFromFile = new PresetList() { List = new List<Preset>() };
         BindingList<Preset> Presets = new BindingList<Preset>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -76,7 +78,7 @@ namespace đồ_án_1___interface
                 foreach (var files in Folder)
                 {
                     file a = new file(files.Name, "", screen.FileName.ToString(), "");
-                    //a.newName = files.Name;
+                    nameFolder.Add(files.Name);
                     ListFolder.Add(a);
                 }
                 DSlistFolder.ItemsSource = ListFolder;
@@ -103,6 +105,7 @@ namespace đồ_án_1___interface
                 foreach (var files in File)
                 {
                     file a = new file(files.Name, "", files.Directory.ToString(), "");
+                    nameFile.Add(files.Name.ToString());
                     ListFile.Add(a);
                 }
                 DSlistFile.ItemsSource = ListFile;
@@ -112,6 +115,23 @@ namespace đồ_án_1___interface
 
         private void Clear_Clicked(object sender, RoutedEventArgs e)
         {
+            //xóa list hành động
+            addedList.Clear();
+
+            //gán kiểm tra lỗi =0
+            kt = 0;
+
+            //xóa list file
+            ListFile.Clear();
+
+            //xóa list folder
+            ListFolder.Clear();
+
+            //xóa list name
+            nameFile.Clear();
+            nameFolder.Clear();
+
+            //xóa list action
             addedList.Clear();
         }
 
@@ -131,14 +151,16 @@ namespace đồ_án_1___interface
                 string json = read.ReadToEnd();
                 loadFromFile = JsonConvert.DeserializeObject<PresetList>(json);
             }
-
-            for (int i = 0; i < loadFromFile.Count; i++)
+            if(loadFromFile!=null)
             {
-                Presets.Add(loadFromFile.List[i]);
-            }
+                for (int i = 0; i < loadFromFile.Count; i++)
+                {
+                    Presets.Add(loadFromFile.List[i]);
+                }
 
-            PresetCombobox.ItemsSource = Presets;
-            PresetCombobox.SelectedIndex = 0;
+                PresetCombobox.ItemsSource = Presets;
+                PresetCombobox.SelectedIndex = 0;
+            }
         }
 
         // save current list of added method to preset file
@@ -153,8 +175,14 @@ namespace đồ_án_1___interface
                 preset.AddToList(method);
             }
 
-            loadFromFile.AddToList(preset);
+            if (loadFromFile == null)
+            {
+                PresetList loadFromFile = new PresetList() { List = new List<Preset>() };
+            }
+
             Presets.Add(preset);
+            loadFromFile.AddToList(preset);
+            
             string JSON = JsonConvert.SerializeObject(loadFromFile, Formatting.Indented);
             using (var write = new StreamWriter(path))
             {
@@ -268,12 +296,39 @@ namespace đồ_án_1___interface
         //<kha mới thêm 10/11/2019>
         private void PreviewFile_Click(object sender, RoutedEventArgs e)
         {
+            for (int i = 0; i < ListFile.Count(); i++)
+            {
+                //string name1 = ListFile[i].Name;
+                for(int j=0;j<addedList.Count();j++)
+                {
+                    //chỉnh sửa sau
+                    //ListFile[i].newName = $"{Guid.NewGuid()}{File[i].Extension}";
+                    ListFile[i].newName = addedList[j].Operate(nameFile[i]);
+                    //add list action
+                }
+            }
 
+            CheckLoopName(ListFile);
+            CheckError(ListFile);
         }
 
         private void ApplyFile_Click(object sender, RoutedEventArgs e)
         {
-
+            if (kt == 0)
+            {
+                MessageBox.Show("Apply");
+                for (int i = 0; i < ListFile.Count(); i++)
+                {
+                    File[i].MoveTo($"{ListFile[i].Path}\\{ListFile[i].newName}");
+                }
+            }
+            else 
+            {
+                if (kt == 1)
+                    MessageBox.Show("Error: Invalid name");
+                if (kt == 2) 
+                    MessageBox.Show("Error: Name Existed");
+            }
         }
 
         /// <summary>
@@ -290,7 +345,7 @@ namespace đồ_án_1___interface
                 {
                     if (temp[j] == '/' || temp[j] == 92 || temp[j] == '>' || temp[j] == '<' || temp[j] == '?' || temp[j] == '*' || temp[j] == '|' || temp[j] == '"')
                     {
-                        ListFile[i].Error = "error";
+                        ListFile[i].Error = "Invalid name";
                         kt = 1;
                         break;
                     }
@@ -310,22 +365,50 @@ namespace đồ_án_1___interface
                 {
                     if (ListFile[i].newName == ListFile[j].newName && ListFile[i].Path == ListFile[j].Path)
                     {
-                        ListFile[i].Error = "error";
-                        ListFile[j].Error = "error";
+                        ListFile[i].Error = "Existed name";
+                        ListFile[j].Error = "Existed name";
                         kt = 2;
                     }
                 }
             }
         }
 
+        //chưa fix
         private void PreviewFolder_Click(object sender, RoutedEventArgs e)
         {
+            for (int i = 0; i < ListFolder.Count(); i++)
+            {
+                //string name1 = ListFile[i].Name;
+                for (int j = 0; j < addedList.Count(); j++)
+                {
+                    //chỉnh sửa sau
+                    //ListFile[i].newName = $"{Guid.NewGuid()}{File[i].Extension}";
+                    ListFolder[i].newName = addedList[j].Operate(nameFolder[i]);
+                    //add list action
+                }
+            }
 
+            CheckLoopName(ListFolder);
+            CheckError(ListFolder);
         }
 
         private void ApplyFolder_Click(object sender, RoutedEventArgs e)
         {
-
+            if (kt == 0)
+            {
+                MessageBox.Show("Apply");
+                for (int i = 0; i < File.Count(); i++)
+                {
+                    File[i].MoveTo($"{ListFile[i].Path}\\{ListFile[i].newName}");
+                }
+            }
+            else
+            {
+                if (kt == 1)
+                    MessageBox.Show("Error: Invalid name");
+                if (kt == 2)
+                    MessageBox.Show("Error: Name Existed");
+            }
         }
         //</kha mới thêm 10/11/2019>
     }
