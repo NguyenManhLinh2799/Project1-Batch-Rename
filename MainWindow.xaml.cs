@@ -21,8 +21,8 @@ namespace đồ_án_1___interface
         BindingList<file> ListFolder = new BindingList<file>();
         FileInfo[] File = null;
         DirectoryInfo[] Folder = null;
-        //List<string> nameFile=new List<string>();
-        //List<string> nameFolder = new List<string>();
+        List<string> nameFile=new List<string>();
+        List<string> nameFolder = new List<string>();
         //kha 10/11/2019
         int kt=0;
 
@@ -78,7 +78,7 @@ namespace đồ_án_1___interface
                 foreach (var files in Folder)
                 {
                     file a = new file(files.Name, "", screen.FileName.ToString(), "");
-                    //nameFolder.Add(files.Name);
+                    nameFolder.Add(files.Name);
                     ListFolder.Add(a);
                 }
                 DSlistFolder.ItemsSource = ListFolder;
@@ -105,7 +105,7 @@ namespace đồ_án_1___interface
                 foreach (var files in File)
                 {
                     file a = new file(files.Name, "", files.Directory.ToString(), "");
-                    //nameFile.Add(files.Name.ToString());
+                    nameFile.Add(files.Name.ToString());
                     ListFile.Add(a);
                 }
                 DSlistFile.ItemsSource = ListFile;
@@ -128,8 +128,8 @@ namespace đồ_án_1___interface
             ListFolder.Clear();
 
             //xóa list name
-            //nameFile.Clear();
-            //nameFolder.Clear();
+            nameFile.Clear();
+            nameFolder.Clear();
 
             //xóa list action
             addedList.Clear();
@@ -296,19 +296,20 @@ namespace đồ_án_1___interface
         //<kha mới thêm 10/11/2019>
         private void PreviewFile_Click(object sender, RoutedEventArgs e)
         {
-            //List<string> NewName = new List<string>();
+            List<string> newname = nameFile;
             //NewName = nameFile;
             for (int i = 0; i < ListFile.Count(); i++)
             {
-                string name1 = ListFile[i].Name;
+                //string name1 = ListFile[i].Name;
                 for(int j=0;j<addedList.Count();j++)
                 {
                    
-                    ListFile[i].newName = addedList[j].Operate(name1);
-                    if(!findPoint(ListFile[i].newName))
-                        {
+                    ListFile[i].newName = addedList[j].Operate(newname[i]);
+                    newname[i]= addedList[j].Operate(newname[i]);
+                    if (!findPoint(ListFile[i].newName))
+                    {
                         ListFile[i].newName += File[i].Extension.ToString();
-                        }
+                    }
                 }
             }
 
@@ -392,14 +393,16 @@ namespace đồ_án_1___interface
         //chưa fix
         private void PreviewFolder_Click(object sender, RoutedEventArgs e)
         {
+            List<string> newname = nameFolder;
             for (int i = 0; i < ListFolder.Count(); i++)
             {
-                string name1 = ListFolder[i].Name;
+                //string name1 = ListFolder[i].Name;
                 for (int j = 0; j < addedList.Count(); j++)
                 {
                     //chỉnh sửa sau
                     //ListFile[i].newName = $"{Guid.NewGuid()}{File[i].Extension}";
-                    ListFolder[i].newName = addedList[j].Operate(name1);
+                    ListFolder[i].newName = addedList[j].Operate(newname[i]);
+                    newname[i]= addedList[j].Operate(newname[i]);
                     //add list action
                 }
             }
